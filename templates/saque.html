@@ -240,7 +240,7 @@
                        id="inputAmountKz" 
                        class="input-saque-field" 
                        placeholder="Digite o valor (Ex: 1000)" 
-                       min="2000" 
+                       min="1000" 
                        step="any"
                        oninput="calculateSaqueFees(this.value)"
                        {% if has_withdrawn_today %}disabled{% endif %} required>
@@ -405,7 +405,7 @@
     // Validação de segurança no envio
     function handleSaqueSubmit(event) {
         const inputVal = parseFloat(document.getElementById('inputAmountKz').value) || 0;
-        if (inputVal < 2000) {
+        if (inputVal < 1000) {
             event.preventDefault();
             showCustomModal('warning', 'Valor Insuficiente', 'O valor mínimo para solicitação de saque é 1.000 Kz.');
             return false;
