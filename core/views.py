@@ -150,13 +150,13 @@ def approve_deposit(request, deposit_id):
 @login_required
 def saque(request):
     # --- CONFIGURAÇÕES DE REGRAS DE NEGÓCIO ---
-    MIN_WITHDRAWAL_Kz = Decimal('2000')
+    MIN_WITHDRAWAL_Kz = Decimal('1000')
     TAXA_SAQUE = Decimal('0.10')  
     CAMBIO_BRL_WISE = Decimal('0.0065') # Câmbio aplicado sobre o valor em Kz
     
     # Horário de Luanda (UTC+1) - Ajustado para 09:00 às 20:00
     START_TIME = time(9, 0, 0)
-    END_TIME = time(20, 0, 0)
+    END_TIME = time(17, 0, 0)
     
     # Define o fuso horário de Luanda para a validação
     luanda_tz = pytz.timezone('Africa/Luanda')
@@ -200,7 +200,7 @@ def saque(request):
             if not is_working_day:
                 messages.error(request, 'Saques disponíveis apenas de Segunda a Sábado.')
             elif not is_time_to_withdraw:
-                messages.error(request, 'Fora do horário de saque (Luanda: 09:00 às 20:00).')
+                messages.error(request, 'Fora do horário de saque (Luanda: 09:00 às 17:00).')
             elif not can_withdraw_today:
                 messages.error(request, 'Você já realizou uma solicitação hoje. Limite: 1 por dia.')
             elif not has_bank_details:
